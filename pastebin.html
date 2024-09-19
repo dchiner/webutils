@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Paste bin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persistent Text Box</title>
     <style>
       body,
       textarea {
@@ -28,8 +30,31 @@
     </style>
   </head>
   <body>
-    <form>
-      <textarea></textarea>
-    </form>
+    <div class="container">
+      <textarea id="textBox"></textarea>
+    </div>
+
+    <script>
+      // Function to save the text to local storage
+      function saveText() {
+        const text = document.getElementById("textBox").value;
+        localStorage.setItem("savedText", text);
+      }
+
+      // Function to load the text from local storage
+      function loadText() {
+        const savedText = localStorage.getItem("savedText");
+        if (savedText) {
+          document.getElementById("textBox").value = savedText;
+        }
+      }
+
+      // Event listener to save text on input
+      document.getElementById("textBox").addEventListener("input", saveText);
+
+      // Load the text when the page loads
+      window.addEventListener("load", loadText);
+    </script>
   </body>
 </html>
+
